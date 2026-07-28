@@ -1,0 +1,25 @@
+{
+  "client_info": {
+    "redirect_uris": [
+      "http://localhost:8765/callback"
+    ],
+    "token_endpoint_auth_method": "none",
+    "grant_types": [
+      "authorization_code",
+      "refresh_token"
+    ],
+    "response_types": [
+      "code"
+    ],
+    "client_name": "Pricing Chatbot MVP",
+    "client_id": "F7y7qgOPYIwTkX1N",
+    "client_id_issued_at": 1784837996
+  },
+  "tokens": {
+    "access_token": "TK053585526:hqX-oQzePknk23PQ:ewoMdHFNtA5c_w7mCsB3Nkqtd-eijr8c",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "scope": "",
+    "refresh_token": "TK053585526:hqX-oQzePknk23PQ:cSHuo0RwGiq36aEa9-7aNigFfVFyONBK"
+  }
+}
