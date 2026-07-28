@@ -225,10 +225,13 @@
       transition-duration: .18s;
       transition-timing-function: cubic-bezier(.4,0,.2,1);
     }
-    button:focus-visible, a:focus-visible, summary:focus-visible, [role="button"]:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--accent-100);
+    button:focus-visible, a:focus-visible, summary:focus-visible, [role="button"]:focus-visible {
+      outline: 2px solid #CBD5E1;
       outline-offset: 2px;
+    }
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: none;
     }
     .btn-primary:hover { background: var(--accent-darker); transform: none; }
     .btn-primary:active { transform: none; }
@@ -286,9 +289,20 @@
       box-shadow: none !important;
       border-color: transparent !important;
     }
+    .field-shell .field-input:focus,
+    .field-shell .field-input:focus-visible {
+      border: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+      --tw-ring-offset-shadow: 0 0 #0000 !important;
+      --tw-ring-shadow: 0 0 #0000 !important;
+    }
+    .route-field-shell:focus-within {
+      border-color: #CBD5E1;
+    }
     .swap-button {
-      width: 42px;
-      height: 42px;
+      width: 30px;
+      height: 30px;
       border-radius: 9999px !important;
       background: #F8FAFC;
       color: #475569;
@@ -378,15 +392,24 @@
     }
     .flight-panel-btn {
       min-height: 112px;
-      border: 1px solid #E2E8F0;
+      border: 0;
       background: #fff;
       text-align: left;
       transition: background-color .18s, border-color .18s, color .18s;
     }
+    .flight-panel-btn + .flight-panel-btn {
+      border-top: 1px solid #E2E8F0;
+    }
+    @media (min-width: 1024px) {
+      .flight-panel-btn + .flight-panel-btn {
+        border-top: 0;
+        border-left: 1px solid #E2E8F0;
+      }
+    }
     .flight-panel-btn:hover,
     .flight-panel-btn.is-active {
-      border-color: #334155;
       background: #F8FAFC;
+      color: #0F172A;
     }
     .flight-panel-btn:disabled {
       opacity: .46;
@@ -398,12 +421,174 @@
     }
     .fare-compare-table th,
     .fare-compare-table td {
-      padding: 7px 9px;
+      padding: 9px 12px;
       border-bottom: 1px solid #E2E8F0;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .fare-matrix-wrap {
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 34px 14px 24px;
+    }
+    .fare-compare-table {
+      border: 1px solid #CBD5E1;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      margin-top: 8px;
     }
     .fare-compare-table th + th,
     .fare-compare-table td + td {
       border-left: 1px solid #E2E8F0;
+    }
+    .fare-compare-table thead th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: #F8FAFC;
+      border-bottom-color: #CBD5E1;
+    }
+    .fare-compare-table thead th:first-child,
+    .fare-compare-table tbody td:first-child,
+    .fare-compare-table tfoot td:first-child {
+      background: #F8FAFC;
+      border-right: 1px solid #CBD5E1;
+    }
+    .fare-compare-table tbody tr:nth-child(even) td:not(.fare-suggested-col) {
+      background: #FAFBFC;
+    }
+    .fare-compare-table tbody tr:hover td:not(.fare-suggested-col) {
+      background: #F8FAFC;
+    }
+    .fare-matrix-title,
+    .fare-row-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #0F172A;
+      width: 100%;
+    }
+    .fare-matrix-title {
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 700 !important;
+    }
+    .fare-row-label {
+      font-size: 12px;
+      line-height: 1.25;
+      font-weight: 700 !important;
+    }
+    .fare-class-title {
+      display: block;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 700 !important;
+      color: #0F172A;
+    }
+    .fare-suggested-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      padding: 5px 12px;
+      border: 1px solid var(--accent-dark);
+      background: var(--accent-dark);
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700 !important;
+    }
+    .fare-compare-table th.fare-suggested-col,
+    .fare-compare-table td.fare-suggested-col {
+      position: relative;
+      z-index: 2;
+      min-width: 320px;
+      width: 320px;
+      padding-left: 26px;
+      padding-right: 26px;
+      background: #FFF1F2;
+      border-left: 1px solid var(--accent-dark) !important;
+      border-right: 1px solid var(--accent-dark) !important;
+    }
+    .fare-compare-table thead th.fare-suggested-col {
+      position: relative;
+      top: -28px;
+      padding-top: 38px;
+      padding-bottom: 36px;
+      background: linear-gradient(180deg, #FFE4E8 0%, #FFF1F2 100%);
+      border-top: 1px solid var(--accent-dark);
+      border-bottom: 1px solid var(--accent-dark);
+    }
+    .fare-compare-table thead th.fare-suggested-col::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-dark);
+    }
+    .fare-compare-table tfoot td.fare-suggested-col {
+      top: 16px;
+      border-bottom: 1px solid var(--accent-dark);
+      padding-top: 20px;
+      padding-bottom: 22px;
+      background: #FFE4E8;
+    }
+    .fare-suggested-col .fare-class-title {
+      font-size: 30px;
+      line-height: 1;
+      color: var(--accent-dark);
+    }
+    .fare-suggested-col .fare-price {
+      margin-top: 10px;
+      font-size: 42px;
+      color: var(--accent-dark);
+    }
+    .fare-suggested-col .fare-cell-value {
+      font-size: 14px;
+      color: #0F172A;
+    }
+    .fare-suggested-note {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #7F1D1D;
+    }
+    .fare-suggested-col .buy-btn {
+      background: var(--accent-dark) !important;
+      border-color: var(--accent-dark) !important;
+      color: #fff !important;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      font-size: 14px;
+    }
+    .fare-suggested-col .buy-btn:hover {
+      background: var(--accent-darker) !important;
+      border-color: var(--accent-darker) !important;
+    }
+    .fare-price {
+      display: block;
+      margin-top: 4px;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 700 !important;
+      color: #0F172A;
+    }
+    .fare-cell-value {
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #1E293B;
+    }
+    .fare-row-icon {
+      width: 16px;
+      height: 16px;
+      color: #475569;
+      flex-shrink: 0;
     }
     .calendar-day {
       min-height: 30px;
@@ -467,6 +652,12 @@
     <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
     <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></symbol>
     <symbol id="i-mic-off" viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></symbol>
+    <symbol id="i-suitcase" viewBox="0 0 24 24"><path d="M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1"/><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 10v6M16 10v6"/></symbol>
+    <symbol id="i-seat" viewBox="0 0 24 24"><path d="M7 3v9a3 3 0 0 0 3 3h7"/><path d="M5 21h14"/><path d="M17 15l2 6"/><path d="M7 12H4a2 2 0 0 0-2 2v1h8"/></symbol>
+    <symbol id="i-change" viewBox="0 0 24 24"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M20 9A8 8 0 0 0 6.34 5.34L4 10"/><path d="M4 15a8 8 0 0 0 13.66 3.66L20 14"/></symbol>
+    <symbol id="i-refund" viewBox="0 0 24 24"><path d="M3 7h18v10H3z"/><circle cx="12" cy="12" r="2.5"/><path d="M7 7a4 4 0 0 1-4 4M17 7a4 4 0 0 0 4 4M7 17a4 4 0 0 0-4-4M17 17a4 4 0 0 1 4-4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-fast" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-12h-7l1-8z"/></symbol>
     <!-- Wingo maskotu (ozgun onden bakan pilot-kaz) -->
     <symbol id="wingo" viewBox="0 0 64 64">
       <!-- kulak kapaklari -->
@@ -626,7 +817,7 @@
         <div class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_0_minmax(0,1fr)_minmax(210px,.95fr)_minmax(180px,.8fr)_148px] gap-y-4 gap-x-1 items-end">
           <!-- NEREDEN (Origin Autocomplete) -->
           <div class="relative">
-            <div class="field-shell rounded-xl">
+            <div class="field-shell route-field-shell rounded-xl">
               <span class="field-caption" data-i18n="lblFrom">NEREDEN</span>
               <input type="text" id="originInput" autocomplete="off" placeholder="Havalimanı veya şehir" class="field-input pr-6" />
               <input type="hidden" name="origin" id="originValue" value="{{ form.origin or 'IST' }}" />
@@ -635,7 +826,7 @@
           </div>
           <div class="relative z-30 flex md:pb-[1px] justify-center md:-mx-6 pointer-events-none">
             <button type="button" onclick="swapAirports()" title="Kalkış ve Varış Değiştir" class="swap-button pointer-events-auto flex items-center justify-center transition" aria-label="Kalkış ve varış noktalarını değiştir">
-              <svg class="ic" viewBox="0 0 24 24" style="width:20px;height:20px;stroke-width:2.2">
+              <svg class="ic" viewBox="0 0 24 24" style="width:15px;height:15px;stroke-width:2.3">
                 <path d="M7 7h11"/>
                 <path d="m15 4 3 3-3 3"/>
                 <path d="M17 17H6"/>
@@ -645,7 +836,7 @@
           </div>
           <!-- NEREYE (Destination Autocomplete) -->
           <div class="relative">
-            <div class="field-shell rounded-xl">
+            <div class="field-shell route-field-shell rounded-xl">
               <span class="field-caption" data-i18n="lblTo">NEREYE</span>
               <input type="text" id="destInput" autocomplete="off" placeholder="Havalimanı veya şehir" class="field-input" />
               <input type="hidden" name="destination" id="destValue" value="{{ form.destination or 'LHR' }}" />
@@ -718,18 +909,11 @@
           </div>
           <button class="btn-primary h-[58px] text-white font-bold px-5 rounded-xl inline-flex items-center justify-center gap-2"><svg class="ic"><use href="#i-search"/></svg> <span data-i18n="searchBtn">Uçuş ara</span></button>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 mt-4 items-center">
-          <button type="button" id="refundableToggle" class="custom-check-wrap flex items-center gap-2 w-fit select-none rounded-lg px-1 py-1" role="checkbox" aria-checked="{{ 'true' if form.refundable_only else 'false' }}">
-            <input type="hidden" name="refundable_only" id="refundableInput" value="{{ 'true' if form.refundable_only else '' }}" />
-            <span class="custom-check rounded-md inline-flex items-center justify-center text-xs">✓</span>
-            <span class="text-sm text-slate-600 font-semibold" data-i18n="refundableOnly">Only refundable</span>
-          </button>
-          <div class="flex items-center gap-2 justify-end">
-            {% if results %}
-              <a href="/" class="px-3.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-xs font-bold text-slate-600 transition flex items-center justify-center gap-1" title="Aramayı Sıfırla">✕ Sıfırla</a>
-            {% endif %}
-          </div>
+        {% if results %}
+        <div class="flex items-center justify-end mt-4">
+          <a href="/" class="px-3.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-xs font-bold text-slate-600 transition flex items-center justify-center gap-1" title="Aramayı Sıfırla">✕ Sıfırla</a>
         </div>
+        {% endif %}
       </form>
     </div>
 
@@ -790,192 +974,126 @@
         {% endif %}
 
         {% if results.flight_count %}
-        <div class="space-y-6">
+        <div class="space-y-4">
           {% for f in results.flights %}
+          {% set card_id = loop.index %}
           {% set eco = f.fares | dictsort | selectattr('1.cabin', 'equalto', 'economy') | list %}
           {% set biz = f.fares | dictsort | selectattr('1.cabin', 'equalto', 'business') | list %}
           {% set cheapest = (f.fares.values() | map(attribute='price_breakdown.grand_total_usd') | min) %}
-          {% set flexible = f.fares.values() | selectattr('cabin','equalto','economy') | selectattr('changeable') | list %}
-          {% set recommended = (flexible | map(attribute='price_breakdown.grand_total_usd') | min) if flexible else cheapest %}
+          {% set eco_from = (eco | map(attribute='1.price_breakdown.grand_total_usd') | min) if eco else None %}
+          {% set biz_from = (biz | map(attribute='1.price_breakdown.grand_total_usd') | min) if biz else None %}
           
-          <div class="bg-white rounded-2xl ring-1 ring-slate-200/80 overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
-
-            <!-- Summary Bar (Matching Official THY Layout in Image 2) -->
-            <div class="px-6 py-5 cursor-pointer hover:bg-slate-50/70 transition-colors select-none"
-                 onclick="toggleFlight('{{ loop.index }}', event)">
-              
-              <div class="flex flex-wrap items-center justify-between gap-6">
-                
-                <!-- Departure, Flight Track & Arrival -->
-                <div class="flex items-center gap-8 min-w-[320px]">
-                  
-                  <!-- Departure (Left) -->
-                  <div class="text-left">
-                    <div class="text-3xl font-black text-slate-900 leading-none tracking-tight">{{ f.hour }}</div>
-                    <div class="text-xs font-black text-slate-800 mt-1.5 uppercase tracking-wider">{{ f.origin }}</div>
-                    <div class="text-[11px] font-semibold text-slate-400 mt-0.5">{{ f.origin_city }}</div>
+          <div class="bg-white border border-slate-200 overflow-hidden">
+            <div class="grid lg:grid-cols-[minmax(380px,1.65fr)_minmax(180px,.62fr)_minmax(180px,.62fr)]">
+              <button type="button" class="flight-panel-btn p-4 lg:p-5" data-panel-btn="flight-{{ card_id }}" onclick="toggleFlightPanel('{{ card_id }}', 'flight', event)" aria-expanded="false">
+                <div class="flex items-center gap-5 md:gap-7">
+                  <div class="text-left min-w-[66px]">
+                    <div class="text-2xl md:text-[28px] font-black text-slate-950 leading-none">{{ f.hour }}</div>
+                    <div class="text-xs font-black text-slate-900 mt-1">{{ f.origin }}</div>
+                    <div class="text-[11px] font-semibold text-slate-500 mt-0.5">{{ f.origin_city }}</div>
                   </div>
-
-                  <!-- Flight Line Graphic with THY Emblem (Middle) -->
-                  <div class="flex flex-col items-center min-w-[150px] md:min-w-[200px]">
-                    <div class="text-[11px] font-bold text-slate-500 mb-1.5" data-i18n="direct">Direkt</div>
-                    <div class="relative w-full flex items-center">
-                      <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-                      <div class="flex-1 h-[2px] bg-slate-300 relative mx-1 flex items-center justify-center">
-                        <img src="/static/thy-emblem.svg" class="w-5 h-5 rounded-full bg-white px-0.5 border border-slate-200" alt="THY">
+                  <div class="flex-1 min-w-[120px]">
+                    <div class="text-[11px] font-semibold text-slate-600 text-center mb-1" data-i18n="direct">Direkt</div>
+                    <div class="relative flex items-center">
+                      <span class="w-2 h-2 rounded-full bg-slate-600"></span>
+                      <div class="flex-1 h-px bg-slate-400 mx-1 flex items-center justify-center">
+                        <img src="/static/thy-emblem.svg" class="w-5 h-5" alt="THY">
                       </div>
-                      <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+                      <span class="w-2 h-2 rounded-full bg-slate-600"></span>
                     </div>
+                    <div class="text-[11px] font-semibold text-slate-500 text-center mt-2">{{ f.duration_str }}</div>
                   </div>
-
-                  <!-- Arrival (Right) -->
-                  <div class="text-left">
-                    <div class="text-3xl font-black text-slate-900 leading-none tracking-tight">{{ f.arrival_hour }}</div>
-                    <div class="text-xs font-black text-slate-800 mt-1.5 uppercase tracking-wider">{{ f.destination }}</div>
-                    <div class="text-[11px] font-semibold text-slate-400 mt-0.5">{{ f.dest_city }}</div>
+                  <div class="text-left min-w-[66px]">
+                    <div class="text-2xl md:text-[28px] font-black text-slate-950 leading-none">{{ f.arrival_hour }}</div>
+                    <div class="text-xs font-black text-slate-900 mt-1">{{ f.destination }}</div>
+                    <div class="text-[11px] font-semibold text-slate-500 mt-0.5">{{ f.dest_city }}</div>
                   </div>
                 </div>
-
-                <!-- Price & Expand/Collapse Toggle Button -->
-                <div class="flex items-center gap-5 ml-auto">
-                  <div class="text-right">
-                    <div class="text-[10px] font-black text-slate-400 tracking-widest uppercase" data-i18n="fromPricePP">KİŞİ BAŞI BAŞLANGIÇ</div>
-                    <div class="text-3xl font-black text-[#C90019] leading-none mt-1">${{ (f.fares.values() | map(attribute='base_price_usd') | min) }}</div>
-                  </div>
-
-                  <button type="button"
-                          class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-[#C90019] font-bold text-xs flex items-center gap-2 transition-all duration-200 border border-slate-200/80 shadow-2xs">
-                    <span id="btn-text-{{ loop.index }}" data-i18n="{{ 'hidePackages' if loop.first else 'showPackages' }}">
-                      {{ 'Paketleri Gizle' if loop.first else 'Paketleri İncele' }}
-                    </span>
-                    <svg id="chevron-{{ loop.index }}" class="w-4 h-4 transition-transform duration-300 {{ 'rotate-180' if loop.first else '' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Sub-meta Line: Total Travel Duration · Aircraft Type · Flight Code -->
-              <div class="mt-4 pt-3 border-t border-dashed border-slate-200 flex items-center justify-between text-xs text-slate-500 font-medium">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <span><span data-i18n="totalDuration">Toplam seyahat süresi</span> <strong class="text-slate-700">{{ f.duration_str }}</strong></span>
+                <div class="mt-3 h-px w-full bg-slate-200"></div>
+                <div class="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[11px] font-semibold text-slate-600">
+                  <span class="font-mono text-slate-900">{{ f.flight_number }}</span>
                   <span class="text-slate-300">·</span>
-                  <span><span data-i18n="aircraft">Uçak tipi</span>: <strong class="text-slate-700">{{ f.plane_model }}</strong></span>
-                  <span class="text-slate-300">·</span>
-                  <span class="font-mono text-slate-600 font-bold">{{ f.flight_number }}</span>
+                  <span>{{ f.plane_model }}</span>
                   <span class="text-slate-300">·</span>
                   <span data-i18n="{{ 'badgeRT' if f.fare_type=='round_trip' else 'badgeOW' }}">{{ 'GİDİŞ-DÖNÜŞ' if f.fare_type=='round_trip' else 'TEK YÖN' }}</span>
+                </div>
+              </button>
+
+              <button type="button" class="flight-panel-btn p-4" data-panel-btn="eco-{{ card_id }}" onclick="toggleFlightPanel('{{ card_id }}', 'eco', event)" aria-expanded="false">
+                <div class="text-[11px] font-semibold text-slate-600" data-i18n="economyCabin">Ekonomi</div>
+                <div class="mt-2 text-2xl font-black text-slate-950">{% if eco_from is not none %}${{ eco_from }}{% else %}—{% endif %}</div>
+              </button>
+
+              <button type="button" class="flight-panel-btn p-4" data-panel-btn="biz-{{ card_id }}" onclick="toggleFlightPanel('{{ card_id }}', 'biz', event)" aria-expanded="false" {% if not biz %}disabled{% endif %}>
+                <div class="text-[11px] font-semibold text-slate-600" data-i18n="businessCabin">Business</div>
+                <div class="mt-2 text-2xl font-black text-slate-950">{% if biz_from is not none %}${{ biz_from }}{% else %}—{% endif %}</div>
+              </button>
+            </div>
+
+            <div id="flight-details-{{ card_id }}" class="hidden border-t border-slate-200 bg-white px-5 py-4 text-sm">
+              <div class="grid sm:grid-cols-4 gap-3 text-[12px]">
+                <div>
+                  <div class="font-semibold text-slate-500" data-i18n="flightDetails">Uçuş detayları</div>
+                  <div class="mt-1 font-black text-slate-950">{{ f.flight_number }}</div>
+                </div>
+                <div>
+                  <div class="font-semibold text-slate-500" data-i18n="totalDuration">Toplam seyahat süresi</div>
+                  <div class="mt-1 font-black text-slate-950">{{ f.duration_str }}</div>
+                </div>
+                <div>
+                  <div class="font-semibold text-slate-500" data-i18n="aircraft">Uçak tipi</div>
+                  <div class="mt-1 font-black text-slate-950">{{ f.plane_model }}</div>
+                </div>
+                <div>
+                  <div class="font-semibold text-slate-500" data-i18n="fromPricePP">KİŞİ BAŞI BAŞLANGIÇ</div>
+                  <div class="mt-1 font-black text-slate-950">${{ cheapest }}</div>
                 </div>
               </div>
             </div>
 
-            <!-- Collapsible details wrapper -->
-            <div id="details-{{ loop.index }}" class="transition-all duration-300 {{ '' if loop.first else 'hidden' }}">
-
-              <!-- Branded fare comparison matrix (THY style) -->
+            <div id="eco-details-{{ card_id }}" class="hidden border-t border-slate-200 bg-white">
               {% if eco %}
-              <div class="overflow-x-auto">
-                <table class="w-full text-[12px] min-w-[720px]">
-                  <thead>
-                    <tr class="border-b border-slate-200 bg-slate-50/70">
-                      <th class="text-left font-black text-[13px] px-6 py-4 w-[240px] text-slate-900" data-i18n="pkgDetails">Paket detayları</th>
+              <div class="fare-matrix-wrap">
+                <table class="fare-compare-table w-full text-[12px] min-w-[980px]">
+                  <thead class="bg-slate-50 text-slate-950">
+                    <tr>
+                      <th class="text-left w-[220px]">
+                        <span class="fare-matrix-title" data-i18n="pkgDetails">Paket detayları</span>
+                      </th>
                       {% for letter, fare in eco %}
-                      {% set best = fare.price_breakdown.grand_total_usd == recommended %}
-                      <th class="px-4 py-4 text-center border-l border-slate-200/60 relative {{ 'bg-rose-50/70' if best }}">
-                        {% if best %}
-                        <div class="mb-2">
-                          <span class="inline-block text-[10px] font-black bg-[#C90019] text-white px-3 py-1 rounded-full shadow-xs tracking-widest uppercase" data-i18n="recommended">ÖNERİLEN</span>
-                        </div>
+                      <th class="text-left {{ 'fare-suggested-col' if fare.class == 'FlexFly' }}">
+                        {% if fare.class == 'FlexFly' %}
+                        <span class="fare-suggested-label" data-i18n="recommended">Önerilen</span>
                         {% endif %}
-                        <div class="font-black text-[17px] {{ 'text-[#C90019]' if best else 'text-slate-900' }}">{{ fare.class }}</div>
-                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">{{ letter }} <span data-i18n="classLbl">sınıfı</span></div>
+                        <span class="fare-class-title">{{ fare.class }}</span>
+                        <span class="fare-price">${{ fare.price_breakdown.grand_total_usd }}</span>
+                        {% if fare.class == 'FlexFly' %}
+                        <span class="fare-suggested-note" data-i18n="balancedPick">Dengeli seçim</span>
+                        {% endif %}
                       </th>
                       {% endfor %}
                     </tr>
                   </thead>
-                  <tbody class="text-slate-700 divide-y divide-slate-100">
-                    {% macro yes() %}<span class="inline-flex w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 items-center justify-center font-extrabold text-xs shadow-2xs">✓</span>{% endmacro %}
-                    {% macro no() %}<span class="inline-flex w-5 h-5 rounded-full bg-rose-50 text-rose-400 items-center justify-center font-bold text-xs">✕</span>{% endmacro %}
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 inline-flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        <span data-i18n="cabinBag">Kabin bagajı</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">1 × {{ fare.cabin_baggage_kg }} kg</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M9 3h6v3H9z"/><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M10 10v6M14 10v6"/></svg>
-                        <span data-i18n="baggageRight">Bagaj hakkı</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.checked_baggage_kg %}<span class="font-extrabold text-slate-900">{{ fare.checked_baggage_kg }} kg</span>{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M7 13h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2z"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
-                        <span data-i18n="seatSelect">Koltuk seçimi</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.seat_label == 'preferred' %}<span class="text-[11px] font-semibold text-slate-800" data-i18n="seatPreferred">Ön sıra ve standart</span>{% elif fare.seat_label == 'standard' %}<span class="text-[11px] font-semibold text-slate-800" data-i18n="seatStandard">Standart koltuk</span>{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M4 4v5h5M20 20v-5h-5"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L4 9m16 6l-1.64 3.36A9 9 0 0 1 3.51 15"/></svg>
-                        <span data-i18n="freeChange">Ücretsiz değişiklik</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.free_change %}{{ yes() }}{% elif fare.changeable %}<span class="inline-block px-2.5 py-0.5 bg-slate-100 text-slate-800 rounded text-[11px] font-bold border border-slate-200">${{ fare.change_fee_usd }} <span data-i18n="deduction">kesinti</span></span>{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                        <span data-i18n="sameDayChange">Aynı gün önceki uçuşa değişiklik</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.same_day_change %}{{ yes() }}{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-                        <span data-i18n="refundRight">Kesintisiz iade</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.free_refund %}{{ yes() }}{% elif fare.refundable %}<span class="inline-block px-2.5 py-0.5 bg-slate-100 text-slate-800 rounded text-[11px] font-bold border border-slate-200">${{ fare.refund_fee_usd }} <span data-i18n="deduction">kesinti</span></span>{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <span data-i18n="milesRow">Mil</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}"><span class="font-extrabold text-slate-900">{{ fare.miles }}</span> <span class="text-slate-400 font-medium" data-i18n="milesUnit">Mil</span></td>{% endfor %}
-                    </tr>
-
-                    <tr class="hover:bg-slate-50/70 transition-colors">
-                      <td class="px-6 py-3.5 font-semibold text-slate-800 flex items-center gap-2.5">
-                        <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        <span data-i18n="fastTrack">Fast track</span>
-                      </td>
-                      {% for letter, fare in eco %}<td class="px-4 py-3.5 text-center border-l border-slate-100 {{ 'bg-rose-50/40' if fare.price_breakdown.grand_total_usd == recommended }}">{% if fare.fast_track %}{{ yes() }}{% else %}{{ no() }}{% endif %}</td>{% endfor %}
-                    </tr>
-
+                  <tbody class="text-slate-800">
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-bag"/></svg><span data-i18n="cabinBag">Kabin bagajı</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">1 × {{ fare.cabin_baggage_kg }} kg</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-suitcase"/></svg><span data-i18n="baggageRight">Bagaj hakkı</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">{% if fare.checked_baggage_kg %}<strong>{{ fare.checked_baggage_kg }} kg</strong>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-seat"/></svg><span data-i18n="seatSelect">Koltuk seçimi</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">{% if fare.seat_label == 'preferred' %}<span data-i18n="seatPreferred">Ön sıra ve standart</span>{% elif fare.seat_label == 'standard' %}<span data-i18n="seatStandard">Standart koltuk</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-change"/></svg><span data-i18n="freeChange">Ücretsiz değişiklik</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">{% if fare.free_change %}<span data-i18n="included">Var</span>{% elif fare.changeable %}${{ fare.change_fee_usd }} <span data-i18n="deduction">kesinti</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-refund"/></svg><span data-i18n="refundRight">Kesintisiz iade</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">{% if fare.free_refund %}<span data-i18n="included">Var</span>{% elif fare.refundable %}${{ fare.refund_fee_usd }} <span data-i18n="deduction">kesinti</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-star"/></svg><span data-i18n="milesRow">Mil</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value"><strong>{{ fare.miles }}</strong> <span data-i18n="milesUnit">Mil</span></span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-fast"/></svg><span data-i18n="fastTrack">Fast track</span></span></td>{% for letter, fare in eco %}<td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}"><span class="fare-cell-value">{% if fare.fast_track %}<span data-i18n="included">Var</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
                   </tbody>
-                  <tfoot>
-                    <tr class="border-t border-slate-200 bg-slate-50/40">
-                      <td class="px-6 py-4"></td>
+                  <tfoot class="bg-white">
+                    <tr>
+                      <td></td>
                       {% for letter, fare in eco %}
-                      {% set best = fare.price_breakdown.grand_total_usd == recommended %}
-                      {% set diff = fare.price_breakdown.grand_total_usd - cheapest %}
-                      <td class="px-3 py-4 border-l border-slate-100 align-top {{ 'bg-rose-50/60' if best }}">
-                        <button class="buy-btn w-full rounded-xl py-3 px-3 font-black text-[13px] transition-all duration-200 {{ 'bg-[#C90019] hover:bg-[#8B0012] text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5' if best else 'border-2 border-slate-200 hover:border-slate-400 text-slate-800 hover:text-slate-900 bg-white hover:bg-slate-50 shadow-2xs' }}"
+                      <td class="{{ 'fare-suggested-col' if fare.class == 'FlexFly' }}">
+                        <button class="buy-btn w-full border border-slate-300 bg-slate-950 hover:bg-slate-800 text-white py-2 px-3 font-black text-[12px]"
                           data-fid="{{ fare.id }}" data-flight="{{ f.flight_number }}" data-cls="{{ fare.class }}"
                           data-date="{{ results.date }}" data-route="{{ results.origin }}-{{ results.destination }}"
                           data-a="{{ results.passengers.adults }}" data-c="{{ results.passengers.children }}" data-b="{{ results.passengers.babies }}">
-                          {% if diff > 0 %}+ ${{ diff }}{% else %}${{ fare.price_breakdown.grand_total_usd }}{% endif %}
+                          <span data-i18n="selectFare">Seç</span>
                         </button>
-                        <div class="text-[10px] text-slate-400 text-center mt-1.5 font-semibold" data-i18n="familyTax">aile · vergi dahil</div>
                       </td>
                       {% endfor %}
                     </tr>
@@ -983,30 +1101,58 @@
                 </table>
               </div>
               {% endif %}
+            </div>
 
-              <!-- Business cabin strip (Clean THY Red & Dark Slate Design) -->
+            <div id="biz-details-{{ card_id }}" class="hidden border-t border-slate-200 bg-white">
               {% if biz %}
-              <div class="border-t border-slate-200 bg-slate-50/70 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-2">
-                  <span class="text-[11px] font-black tracking-widest text-slate-900 uppercase bg-white px-3 py-1 rounded-md border border-slate-200 shadow-2xs" data-i18n="businessCabin">
-                    BUSINESS
-                  </span>
-                </div>
-                <div class="flex flex-wrap items-center gap-3">
-                  {% for letter, fare in biz %}
-                  <button class="buy-btn rounded-xl px-4 py-2 text-xs font-bold border border-slate-200 bg-white hover:bg-rose-50/50 hover:border-[#C90019] text-slate-900 shadow-2xs transition-all flex items-center gap-2"
-                    data-fid="{{ fare.id }}" data-flight="{{ f.flight_number }}" data-cls="{{ fare.class }}"
-                    data-date="{{ results.date }}" data-route="{{ results.origin }}-{{ results.destination }}"
-                    data-a="{{ results.passengers.adults }}" data-c="{{ results.passengers.children }}" data-b="{{ results.passengers.babies }}">
-                    <span class="font-extrabold text-slate-900">{{ fare.class }}</span>
-                    <span class="font-black text-[#C90019] text-sm">${{ fare.price_breakdown.grand_total_usd }}</span>
-                    <span class="text-slate-500 font-medium">· {{ fare.checked_baggage_kg }}kg · {{ fare.miles }} mil</span>
-                  </button>
-                  {% endfor %}
-                </div>
+              <div class="fare-matrix-wrap">
+                <table class="fare-compare-table w-full text-[12px] min-w-[880px]">
+                  <thead class="bg-slate-50 text-slate-950">
+                    <tr>
+                      <th class="text-left w-[220px]">
+                        <span class="fare-matrix-title" data-i18n="pkgDetails">Paket detayları</span>
+                      </th>
+                      {% for letter, fare in biz %}
+                      <th class="text-left {{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}">
+                        {% if fare.class == 'BusinessPrime' %}
+                        <span class="fare-suggested-label" data-i18n="recommended">Önerilen</span>
+                        {% endif %}
+                        <span class="fare-class-title">{{ fare.class }}</span>
+                        <span class="fare-price">${{ fare.price_breakdown.grand_total_usd }}</span>
+                        {% if fare.class == 'BusinessPrime' %}
+                        <span class="fare-suggested-note" data-i18n="balancedPick">Dengeli seçim</span>
+                        {% endif %}
+                      </th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody class="text-slate-800">
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-bag"/></svg><span data-i18n="cabinBag">Kabin bagajı</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">1 × {{ fare.cabin_baggage_kg }} kg</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-suitcase"/></svg><span data-i18n="baggageRight">Bagaj hakkı</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">{% if fare.checked_baggage_kg %}<strong>{{ fare.checked_baggage_kg }} kg</strong>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-seat"/></svg><span data-i18n="seatSelect">Koltuk seçimi</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">{% if fare.seat_label == 'preferred' %}<span data-i18n="seatPreferred">Ön sıra ve standart</span>{% elif fare.seat_label == 'standard' %}<span data-i18n="seatStandard">Standart koltuk</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-change"/></svg><span data-i18n="freeChange">Ücretsiz değişiklik</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">{% if fare.free_change %}<span data-i18n="included">Var</span>{% elif fare.changeable %}${{ fare.change_fee_usd }} <span data-i18n="deduction">kesinti</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-refund"/></svg><span data-i18n="refundRight">Kesintisiz iade</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">{% if fare.free_refund %}<span data-i18n="included">Var</span>{% elif fare.refundable %}${{ fare.refund_fee_usd }} <span data-i18n="deduction">kesinti</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-star"/></svg><span data-i18n="milesRow">Mil</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value"><strong>{{ fare.miles }}</strong> <span data-i18n="milesUnit">Mil</span></span></td>{% endfor %}</tr>
+                    <tr><td><span class="fare-row-label"><svg class="ic fare-row-icon"><use href="#i-fast"/></svg><span data-i18n="fastTrack">Fast track</span></span></td>{% for letter, fare in biz %}<td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}"><span class="fare-cell-value">{% if fare.fast_track %}<span data-i18n="included">Var</span>{% else %}<span data-i18n="unavailable">Yok</span>{% endif %}</span></td>{% endfor %}</tr>
+                  </tbody>
+                  <tfoot class="bg-white">
+                    <tr>
+                      <td></td>
+                      {% for letter, fare in biz %}
+                      <td class="{{ 'fare-suggested-col' if fare.class == 'BusinessPrime' }}">
+                        <button class="buy-btn w-full border border-slate-300 bg-slate-950 hover:bg-slate-800 text-white py-2 px-3 font-black text-[12px]"
+                          data-fid="{{ fare.id }}" data-flight="{{ f.flight_number }}" data-cls="{{ fare.class }}"
+                          data-date="{{ results.date }}" data-route="{{ results.origin }}-{{ results.destination }}"
+                          data-a="{{ results.passengers.adults }}" data-c="{{ results.passengers.children }}" data-b="{{ results.passengers.babies }}">
+                          <span data-i18n="selectFare">Seç</span>
+                        </button>
+                      </td>
+                      {% endfor %}
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
               {% endif %}
-
             </div>
           </div>
           {% endfor %}
@@ -1438,7 +1584,7 @@
         heroTitleCase:'Nereye uçuyoruz?', heroSubCase:'Havacılık Gelir Yönetimi Vaka Çalışması · Yılmaz Ailesi senaryosu · 2 MCP kaynağı',
         tabSearch:'Uçuş ara', tabCheckin:'Check-in', tabManage:'Rezervasyonunu yönet', tabStatus:'Uçuş durumu',
         lblFrom:'NEREDEN', lblTo:'NEREYE', lblDate:'GİDİŞ', lblReturnDate:'DÖNÜŞ', lblTrip:'SEYAHAT TİPİ', lblAdult:'YETİŞKİN', lblChild:'ÇOCUK', lblInfant:'BEBEK', lblPassengers:'YOLCULAR',
-        optOW:'Tek yön', optRT:'Gidiş-dönüş', changeableOnly:'Sadece değiştirilebilir', refundableOnly:'Only refundable', searchBtn:'Uçuş ara',
+        optOW:'Tek yön', optRT:'Gidiş-dönüş', changeableOnly:'Sadece değiştirilebilir', searchBtn:'Uçuş ara',
         paxSingular:'Yolcu', paxPlural:'Yolcu',
         feat1t:'Dinamik fiyatlandırma', feat1d:'Kalkışa 2 gün kala ×1.45, 7 gün kala ×1.25 çarpan. Erken alan kazanır.',
         feat2t:'Gidiş-dönüş avantajı', feat2d:"Round-trip bilet, tek yönün %88'i. İki ayrı bilet neredeyse hiç mantıklı değil.",
@@ -1489,7 +1635,8 @@
         seatStandard:'Standart koltuk', seatPreferred:'Ön sıra ve standart',
         freeChange:'Ücretsiz değişiklik', sameDayChange:'Aynı gün önceki uçuşa değişiklik',
         refundRight:'Kesintisiz iade', deduction:'kesinti', milesRow:'Mil', milesUnit:'Mil',
-        fastTrack:'Fast track', seatsLeftRow:'Kalan koltuk', businessCabin:'BUSINESS',
+        fastTrack:'Fast track', seatsLeftRow:'Kalan koltuk', economyCabin:'Ekonomi', businessCabin:'Business',
+        flightDetails:'Uçuş detayları', included:'Var', unavailable:'Yok', selectFare:'Seç', balancedPick:'Dengeli seçim',
         showPackages:'Paketleri ve Fiyatları İncele', hidePackages:'Paketleri Gizle',
         kpiFlightsL:'UÇUŞ', kpiFaresL:'FARE SATIRI', kpiToolsL:'AGENT TOOL', kpiPnrsL:'REZERVASYON',
         prFeatured:'ÖNE ÇIKAN ÜCRETLER', prTitle:'Bu haftanın popüler rotaları',
@@ -1522,7 +1669,7 @@
         heroTitleCase:'Where are we flying?', heroSubCase:'Airline Revenue Management Case Study · Yılmaz Family scenario · 2 MCP sources',
         tabSearch:'Search flights', tabCheckin:'Check-in', tabManage:'Manage booking', tabStatus:'Flight status',
         lblFrom:'FROM', lblTo:'TO', lblDate:'DEPARTURE', lblReturnDate:'RETURN', lblTrip:'TRIP TYPE', lblAdult:'ADULT', lblChild:'CHILD', lblInfant:'INFANT', lblPassengers:'PASSENGERS',
-        optOW:'One way', optRT:'Round trip', changeableOnly:'Changeable only', refundableOnly:'Only refundable', searchBtn:'Search',
+        optOW:'One way', optRT:'Round trip', changeableOnly:'Changeable only', searchBtn:'Search',
         paxSingular:'Passenger', paxPlural:'Passengers',
         feat1t:'Dynamic pricing', feat1d:'×1.45 within 2 days of departure, ×1.25 within 7. Book early, pay less.',
         feat2t:'Round-trip advantage', feat2d:'A round-trip fare is 88% of one-way. Two separate one-ways rarely make sense.',
@@ -1573,7 +1720,8 @@
         seatStandard:'Standard seat', seatPreferred:'Front row & standard',
         freeChange:'Free change', sameDayChange:'Same-day change to earlier flight',
         refundRight:'Refund without penalty', deduction:'deduction', milesRow:'Miles', milesUnit:'Miles',
-        fastTrack:'Fast track', seatsLeftRow:'Seats left', businessCabin:'BUSINESS',
+        fastTrack:'Fast track', seatsLeftRow:'Seats left', economyCabin:'Economy', businessCabin:'Business',
+        flightDetails:'Flight details', included:'Included', unavailable:'Not available', selectFare:'Select', balancedPick:'Balanced pick',
         showPackages:'View Packages & Prices', hidePackages:'Hide Packages',
         kpiFlightsL:'FLIGHTS', kpiFaresL:'FARE ROWS', kpiToolsL:'AGENT TOOLS', kpiPnrsL:'BOOKINGS',
         prFeatured:'FEATURED FARES', prTitle:'Popular routes this week',
@@ -1614,29 +1762,29 @@
     document.getElementById('langTr').onclick = () => { lang='tr'; localStorage.setItem('ui-lang','tr'); applyLang(); };
     document.getElementById('langEn').onclick = () => { lang='en'; localStorage.setItem('ui-lang','en'); applyLang(); };
 
-    // Flight details accordion toggle
-    window.toggleFlight = function(cardId, event) {
+    // Flight result panels
+    window.toggleFlightPanel = function(cardId, panel, event) {
       if (event && event.target && event.target.closest('.buy-btn')) return;
-      const content = document.getElementById('details-' + cardId);
-      const btnText = document.getElementById('btn-text-' + cardId);
-      const chevron = document.getElementById('chevron-' + cardId);
-      if (!content) return;
+      const names = ['flight', 'eco', 'biz'];
+      const target = document.getElementById(panel + '-details-' + cardId);
+      if (!target) return;
+      const shouldOpen = target.classList.contains('hidden');
 
-      const isHidden = content.classList.contains('hidden');
-      if (isHidden) {
-        content.classList.remove('hidden');
-        if (btnText) {
-          btnText.setAttribute('data-i18n', 'hidePackages');
-          btnText.textContent = t('hidePackages');
-        }
-        if (chevron) chevron.classList.add('rotate-180');
-      } else {
-        content.classList.add('hidden');
-        if (btnText) {
-          btnText.setAttribute('data-i18n', 'showPackages');
-          btnText.textContent = t('showPackages');
-        }
-        if (chevron) chevron.classList.remove('rotate-180');
+      names.forEach((name) => {
+        const detail = document.getElementById(name + '-details-' + cardId);
+        if (detail) detail.classList.add('hidden');
+        document.querySelectorAll(`[data-panel-btn="${name}-${cardId}"]`).forEach((btn) => {
+          btn.classList.remove('is-active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      if (shouldOpen) {
+        target.classList.remove('hidden');
+        document.querySelectorAll(`[data-panel-btn="${panel}-${cardId}"]`).forEach((btn) => {
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-expanded', 'true');
+        });
       }
     };
 
@@ -2559,13 +2707,6 @@
       const popup = document.getElementById('paxPopup');
       const trigger = document.getElementById('paxButton');
       if (popup && trigger && !popup.contains(e.target) && !trigger.contains(e.target)) closePopup(popup, trigger);
-    });
-    document.getElementById('refundableToggle')?.addEventListener('click', () => {
-      const btn = document.getElementById('refundableToggle');
-      const input = document.getElementById('refundableInput');
-      const next = btn.getAttribute('aria-checked') !== 'true';
-      btn.setAttribute('aria-checked', next ? 'true' : 'false');
-      input.value = next ? 'true' : '';
     });
     setTripType(document.getElementById('tripTypeInput')?.value || 'one_way');
     updatePax();

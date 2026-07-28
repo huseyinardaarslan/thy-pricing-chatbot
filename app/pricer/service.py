@@ -46,13 +46,11 @@ def search_flights(
     babies: int = 0,
     trip_type: str = "one_way",
     changeable_only: bool = False,
-    refundable_only: bool = False,
 ) -> dict:
     """Return flights and fares for a route and date (basic mode: A/B/C).
 
     seat_passengers = adults + children (infants occupy no seat).
     When changeable_only is True, only changeable fares are returned.
-    When refundable_only is True, only refundable fares are returned.
     """
     conn = domain.connect()
     fare_type = "round_trip" if trip_type == "round_trip" else "one_way"
@@ -93,8 +91,6 @@ def search_flights(
             if match is not None:
                 fare = _fare_dict(match, seat_passengers)
                 if changeable_only and not fare["changeable"]:
-                    continue
-                if refundable_only and not fare["refundable"]:
                     continue
                 fare["price_breakdown"] = domain.price_breakdown(
                     match["base_price_usd"], adults, children, babies

@@ -16,3 +16,4 @@ __pycache__/
 # SQLite databases
 data/pricer.sqlite3
 data/*.sqlite3
+data/thy_tokens.json
