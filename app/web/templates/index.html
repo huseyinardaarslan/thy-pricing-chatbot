@@ -8,12 +8,12 @@
   <link rel="apple-touch-icon" href="/static/thy-emblem.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: {
-      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-      boxShadow: { 'card': '0 1px 3px rgba(0,0,0,.04), 0 8px 24px -4px rgba(0,0,0,.08)', 'card-hover': '0 4px 12px rgba(0,0,0,.06), 0 20px 40px -8px rgba(0,0,0,.12)', 'search': '0 2px 4px rgba(0,0,0,.03), 0 20px 50px -16px rgba(0,0,0,.15)' },
+      fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+      boxShadow: { 'card': 'none', 'card-hover': 'none', 'search': 'none' },
     }}};
   </script>
   <style>
@@ -89,7 +89,7 @@
 
     /* Premium input styling */
     .premium-input {
-      border: 1.5px solid #E2E8F0;
+      border: 1px solid #E2E8F0;
       background: #FAFBFC;
       transition: all .2s;
     }
@@ -197,6 +197,253 @@
     }
     .anim-cloud-1 { animation: cloudFloat1 12s ease-in-out infinite; }
     .anim-cloud-2 { animation: cloudFloat2 15s ease-in-out infinite; }
+
+    * { letter-spacing: 0 !important; }
+    [class*="shadow"], [class*="drop-shadow"], .glass-pill, .premium-input:focus, .btn-primary,
+    .btn-primary:hover, .hover-card, .hover-card:hover, .feat-card:hover, .fare-glow,
+    .route-banner-container, #chatBtn, #chatBtn:hover { box-shadow: none !important; filter: none !important; }
+    [class*="ring"] {
+      --tw-ring-offset-shadow: 0 0 #0000 !important;
+      --tw-ring-shadow: 0 0 #0000 !important;
+      box-shadow: none !important;
+    }
+    [class*="border-2"], [class*="border-[2"], [class*="border-[3"] {
+      border-width: 1px !important;
+    }
+    [class*="rounded"] {
+      border-radius: 6px !important;
+    }
+    .rounded-full, [class*="rounded-full"] {
+      border-radius: 8px !important;
+    }
+    [class*="hover:-translate"], [class*="hover:scale"], [class*="group-hover:scale"] { transform: none !important; }
+    .font-bold { font-weight: 600 !important; }
+    .font-extrabold, .font-black { font-weight: 650 !important; }
+    button, a, summary, [onclick], [role="button"], .cursor-pointer {
+      cursor: pointer;
+      transition-property: background-color, border-color, color, opacity, outline-color;
+      transition-duration: .18s;
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+    }
+    button:focus-visible, a:focus-visible, summary:focus-visible, [role="button"]:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--accent-100);
+      outline-offset: 2px;
+    }
+    .btn-primary:hover { background: var(--accent-darker); transform: none; }
+    .btn-primary:active { transform: none; }
+    .hover-card:hover, .feat-card:hover { transform: none; }
+
+    .lookup-card {
+      overflow: visible;
+      position: relative;
+      z-index: 80;
+    }
+    .lookup-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+    .field-shell {
+      height: 58px;
+      border: 1px solid #E2E8F0;
+      background: #FAFBFC;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      padding: 7px 12px;
+      transition: background-color .18s, border-color .18s, outline-color .18s;
+    }
+    .field-shell:hover,
+    .field-shell:focus-within,
+    .field-shell[aria-expanded="true"] {
+      border-color: var(--accent-dark);
+      background: #fff;
+    }
+    .field-caption {
+      display: block;
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .field-input {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      outline: none;
+      font-size: 14px;
+      line-height: 1.25;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .field-input:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: transparent !important;
+    }
+    .swap-button {
+      width: 42px;
+      height: 42px;
+      border-radius: 9999px !important;
+      background: #F8FAFC;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+    .swap-button:hover {
+      background: var(--accent-50);
+      color: var(--accent-dark);
+      border-color: var(--accent-100);
+    }
+    .trip-option {
+      border: 1px solid #E2E8F0;
+      background: #fff;
+      color: #475569;
+    }
+    .trip-option:hover, .trip-option[aria-checked="true"] {
+      border-color: var(--accent-dark);
+      color: var(--accent-dark);
+      background: var(--accent-50);
+    }
+    .popup-panel {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity .18s ease, max-height .22s ease, visibility .18s ease;
+    }
+    .popup-panel.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      max-height: 420px;
+      overflow: visible;
+      z-index: 120;
+    }
+    .airport-popup {
+      min-width: min(440px, calc(100vw - 48px));
+      width: max-content;
+      max-width: min(520px, calc(100vw - 48px));
+    }
+    .airport-list {
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .airport-row:hover,
+    .airport-row.ac-active {
+      background: var(--accent-50) !important;
+      color: #7f1d1d;
+    }
+    .joined-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      height: 58px;
+      min-height: 0;
+      align-items: stretch;
+      box-sizing: border-box;
+      padding: 0;
+      gap: 0;
+    }
+    .joined-picker.is-one-way { grid-template-columns: 1fr; }
+    .joined-picker.is-one-way #returnPreviewSegment { display: none; }
+    .joined-picker:hover,
+    .joined-picker[aria-expanded="true"] {
+      border-color: var(--accent-dark);
+      background: #fff;
+    }
+    .joined-segment + .joined-segment { border-left: 1px solid #E2E8F0; }
+    .joined-segment {
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 5px;
+    }
+    .date-day { font-size: 15px; line-height: 1; font-weight: 650; }
+    .date-month { font-size: 11px; color: #64748b; font-weight: 600; }
+    .date-empty { min-height: 15px; }
+    #paxButtonText {
+      font-size: 14px;
+      line-height: 1.25;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .flight-panel-btn {
+      min-height: 112px;
+      border: 1px solid #E2E8F0;
+      background: #fff;
+      text-align: left;
+      transition: background-color .18s, border-color .18s, color .18s;
+    }
+    .flight-panel-btn:hover,
+    .flight-panel-btn.is-active {
+      border-color: #334155;
+      background: #F8FAFC;
+    }
+    .flight-panel-btn:disabled {
+      opacity: .46;
+      cursor: not-allowed;
+    }
+    .flight-panel-btn:focus-visible {
+      outline: 2px solid #CBD5E1;
+      outline-offset: -2px;
+    }
+    .fare-compare-table th,
+    .fare-compare-table td {
+      padding: 7px 9px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .fare-compare-table th + th,
+    .fare-compare-table td + td {
+      border-left: 1px solid #E2E8F0;
+    }
+    .calendar-day {
+      min-height: 30px;
+      border: 1px solid transparent;
+    }
+    .calendar-day:hover {
+      background: var(--accent-50);
+      border-color: var(--accent-100);
+    }
+    .calendar-day.is-selected {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+    .calendar-day.is-in-range {
+      background: var(--accent-50);
+      border-color: var(--accent-100);
+      color: var(--accent-darker);
+    }
+    .calendar-day.is-preview {
+      background: var(--accent-100);
+      border-color: var(--accent);
+      color: var(--accent-darker);
+    }
+    .custom-check {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #CBD5E1;
+      background: #fff;
+      color: transparent;
+    }
+    .custom-check-wrap:hover .custom-check,
+    .custom-check-wrap:focus-visible .custom-check {
+      border-color: var(--accent-dark);
+      background: var(--accent-50);
+    }
+    .custom-check-wrap[aria-checked="true"] .custom-check {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
+      color: #fff;
+    }
   </style>
 </head>
 <body class="text-[#1A1A1A] antialiased min-h-screen flex flex-col font-sans" style="background: var(--surface);">
@@ -365,7 +612,7 @@
   </div>
 
   <main class="flex-1 max-w-6xl mx-auto w-full px-6 pb-20 -mt-14 relative z-20">
-    <div class="bg-white rounded-2xl shadow-search ring-1 ring-slate-200/60 fade-in overflow-hidden">
+    <div class="lookup-card bg-white rounded-2xl shadow-search ring-1 ring-slate-200/60 fade-in">
       <div class="theme-thy-only border-b border-slate-100">
         <div class="flex text-[13px] font-bold text-slate-500">
           <span class="px-5 py-3.5 thy-tab-active cursor-default inline-flex items-center gap-2"><svg class="ic"><use href="#i-plane"/></svg> <span data-i18n="tabSearch">Uçuş ara</span></span>
@@ -375,61 +622,112 @@
         </div>
       </div>
       <form method="post" action="/search" class="p-6">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <!-- SEYAHAT TİPİ -->
-          <div>
-            <label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblTrip">SEYAHAT TİPİ</label>
-            <select name="trip_type" id="tripTypeSelect" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none">
-              <option value="one_way" {% if form.trip_type=='one_way' %}selected{% endif %} data-i18n="optOW">Tek yön</option>
-              <option value="round_trip" {% if form.trip_type=='round_trip' %}selected{% endif %} data-i18n="optRT">Gidiş-dönüş</option>
-            </select>
-          </div>
+        <input type="hidden" name="trip_type" id="tripTypeInput" value="{{ form.trip_type or 'one_way' }}" />
+        <div class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_0_minmax(0,1fr)_minmax(210px,.95fr)_minmax(180px,.8fr)_148px] gap-y-4 gap-x-1 items-end">
           <!-- NEREDEN (Origin Autocomplete) -->
           <div class="relative">
-            <label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblFrom">NEREDEN</label>
-            <div class="relative">
-              <input type="text" id="originInput" autocomplete="off" placeholder="Havalimanı veya şehir (ör: IST, İzmir)..." class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none pr-6" />
+            <div class="field-shell rounded-xl">
+              <span class="field-caption" data-i18n="lblFrom">NEREDEN</span>
+              <input type="text" id="originInput" autocomplete="off" placeholder="Havalimanı veya şehir" class="field-input pr-6" />
               <input type="hidden" name="origin" id="originValue" value="{{ form.origin or 'IST' }}" />
-              <button type="button" onclick="swapAirports()" title="Kalkış ve Varış Değiştir" class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-30 w-6 h-6 rounded-full bg-white border border-slate-200 shadow-md hover:bg-slate-50 items-center justify-center text-xs font-bold text-slate-600 transition">⇄</button>
             </div>
-            <div id="originDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-2xl border border-slate-200 max-h-64 overflow-y-auto z-50 divide-y divide-slate-100"></div>
+            <div id="originDropdown" class="popup-panel airport-popup absolute top-full left-0 mt-1 bg-white rounded-xl border border-slate-200 z-50 divide-y divide-slate-100"></div>
+          </div>
+          <div class="relative z-30 flex md:pb-[1px] justify-center md:-mx-6 pointer-events-none">
+            <button type="button" onclick="swapAirports()" title="Kalkış ve Varış Değiştir" class="swap-button pointer-events-auto flex items-center justify-center transition" aria-label="Kalkış ve varış noktalarını değiştir">
+              <svg class="ic" viewBox="0 0 24 24" style="width:20px;height:20px;stroke-width:2.2">
+                <path d="M7 7h11"/>
+                <path d="m15 4 3 3-3 3"/>
+                <path d="M17 17H6"/>
+                <path d="m9 14-3 3 3 3"/>
+              </svg>
+            </button>
           </div>
           <!-- NEREYE (Destination Autocomplete) -->
           <div class="relative">
-            <label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblTo">NEREYE</label>
-            <div class="relative">
-              <input type="text" id="destInput" autocomplete="off" placeholder="Havalimanı veya şehir (ör: LHR, Paris)..." class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none" />
+            <div class="field-shell rounded-xl">
+              <span class="field-caption" data-i18n="lblTo">NEREYE</span>
+              <input type="text" id="destInput" autocomplete="off" placeholder="Havalimanı veya şehir" class="field-input" />
               <input type="hidden" name="destination" id="destValue" value="{{ form.destination or 'LHR' }}" />
             </div>
-            <div id="destDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-2xl border border-slate-200 max-h-64 overflow-y-auto z-50 divide-y divide-slate-100"></div>
+            <div id="destDropdown" class="popup-panel airport-popup absolute top-full left-0 mt-1 bg-white rounded-xl border border-slate-200 z-50 divide-y divide-slate-100"></div>
           </div>
-          <!-- GİDİŞ TARİHİ -->
-          <div>
-            <label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblDate">GİDİŞ</label>
-            <input type="date" name="date" id="departDate" value="{{ form.date or '' }}" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none" />
+          <!-- CONJOINED DATE PICKER -->
+          <div class="relative z-[90]">
+            <input type="hidden" name="date" id="departDate" value="{{ form.date or '' }}" />
+            <input type="hidden" name="return_date" id="returnDate" value="{{ form.return_date or '' }}" />
+            <button type="button" id="datePickerButton" class="field-shell joined-picker w-full rounded-xl text-left" aria-expanded="false" aria-controls="datePickerPopup">
+              <span class="joined-segment px-3">
+                <span class="field-caption" data-i18n="lblDate">GİDİŞ</span>
+                <span class="flex items-baseline gap-1.5 date-empty"><span id="departDayPreview" class="date-day"></span><span id="departMonthPreview" class="date-month"></span></span>
+              </span>
+              <span class="joined-segment px-3" id="returnPreviewSegment">
+                <span class="field-caption" data-i18n="lblReturnDate">DÖNÜŞ</span>
+                <span class="flex items-baseline gap-1.5 date-empty"><span id="returnDayPreview" class="date-day"></span><span id="returnMonthPreview" class="date-month"></span></span>
+              </span>
+            </button>
+            <div id="datePickerPopup" class="popup-panel absolute top-full left-0 mt-1 w-[min(390px,calc(100vw-48px))] bg-white rounded-xl border border-slate-200 z-[100] p-3">
+              <div class="grid grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 mb-3" role="radiogroup" aria-label="Trip type">
+                <button type="button" class="trip-option rounded-lg px-3 py-1.5 text-xs font-bold" role="radio" data-trip-option="one_way" aria-checked="{{ 'true' if form.trip_type!='round_trip' else 'false' }}" data-i18n="optOW">Tek yön</button>
+                <button type="button" class="trip-option rounded-lg px-3 py-1.5 text-xs font-bold" role="radio" data-trip-option="round_trip" aria-checked="{{ 'true' if form.trip_type=='round_trip' else 'false' }}" data-i18n="optRT">Gidiş-dönüş</button>
+              </div>
+              <div class="flex items-center justify-between mb-2">
+                <button type="button" id="calPrev" class="w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">‹</button>
+                <div id="calendarTitle" class="text-sm font-bold text-slate-800"></div>
+                <button type="button" id="calNext" class="w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">›</button>
+              </div>
+              <div id="calendarGrid" class="grid grid-cols-7 gap-0.5 text-center text-sm"></div>
+              <div class="mt-2 text-[11px] text-slate-400 font-medium" id="datePickerHint"></div>
+            </div>
           </div>
-          <!-- DÖNÜŞ TARİHİ (Round-trip field: stays visible, dimmed when one_way) -->
-          <div id="returnDateBox" class="transition-all duration-300">
-            <label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblReturnDate">DÖNÜŞ</label>
-            <input type="date" name="return_date" id="returnDate" value="{{ form.return_date or '' }}" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none transition-all duration-300" />
+          <!-- PASSENGERS -->
+          <div class="relative">
+            <input type="hidden" name="adults" id="adultsInput" value="{{ form.adults }}" />
+            <input type="hidden" name="children" id="childrenInput" value="{{ form.children }}" />
+            <input type="hidden" name="babies" id="babiesInput" value="{{ form.babies }}" />
+            <button type="button" id="paxButton" class="field-shell w-full rounded-xl text-left" aria-expanded="false" aria-controls="paxPopup">
+              <span class="field-caption" data-i18n="lblPassengers">YOLCULAR</span>
+              <span id="paxButtonText">1 Yolcu</span>
+            </button>
+            <div id="paxPopup" class="popup-panel absolute top-full right-0 mt-1 w-[min(320px,calc(100vw-48px))] bg-white rounded-xl border border-slate-200 z-50 p-4 space-y-3">
+              <div class="flex items-center justify-between gap-3" data-pax-row="adults">
+                <div><div class="text-sm font-bold" data-i18n="lblAdult">YETİŞKİN</div><div class="text-xs text-slate-400">12+</div></div>
+                <div class="flex items-center gap-2">
+                  <button type="button" class="pax-minus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">−</button>
+                  <span class="w-7 text-center font-bold" id="adultsCount">1</span>
+                  <button type="button" class="pax-plus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">+</button>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-3" data-pax-row="children">
+                <div><div class="text-sm font-bold" data-i18n="lblChild">ÇOCUK</div><div class="text-xs text-slate-400">2-11</div></div>
+                <div class="flex items-center gap-2">
+                  <button type="button" class="pax-minus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">−</button>
+                  <span class="w-7 text-center font-bold" id="childrenCount">0</span>
+                  <button type="button" class="pax-plus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">+</button>
+                </div>
+              </div>
+              <div class="flex items-center justify-between gap-3" data-pax-row="babies">
+                <div><div class="text-sm font-bold" data-i18n="lblInfant">BEBEK</div><div class="text-xs text-slate-400">0-2</div></div>
+                <div class="flex items-center gap-2">
+                  <button type="button" class="pax-minus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">−</button>
+                  <span class="w-7 text-center font-bold" id="babiesCount">0</span>
+                  <button type="button" class="pax-plus w-8 h-8 rounded-lg border border-slate-200 hover:bg-slate-50">+</button>
+                </div>
+              </div>
+            </div>
           </div>
+          <button class="btn-primary h-[58px] text-white font-bold px-5 rounded-xl inline-flex items-center justify-center gap-2"><svg class="ic"><use href="#i-search"/></svg> <span data-i18n="searchBtn">Uçuş ara</span></button>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 items-end">
-          <div><label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5" data-i18n="lblAdult">YETİŞKİN</label>
-            <input type="number" name="adults" min="1" value="{{ form.adults }}" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none" /></div>
-          <div><label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5"><span data-i18n="lblChild">ÇOCUK</span> <span class="text-slate-300">%75</span></label>
-            <input type="number" name="children" min="0" value="{{ form.children }}" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none" /></div>
-          <div><label class="block text-[11px] font-bold text-slate-400 tracking-wider mb-1.5"><span data-i18n="lblInfant">BEBEK</span> <span class="text-slate-300">%10</span></label>
-            <input type="number" name="babies" min="0" value="{{ form.babies }}" class="w-full rounded-xl premium-input px-3 py-2.5 text-sm font-semibold outline-none" /></div>
-          <label class="flex items-center gap-2 pb-2.5 cursor-pointer select-none col-span-2 md:col-span-1">
-            <input type="checkbox" name="changeable_only" value="true" {% if form.changeable_only %}checked{% endif %} class="rounded border-slate-300" style="accent-color: var(--accent-dark);" />
-            <span class="text-sm text-slate-600 font-semibold" data-i18n="changeableOnly">Sadece değiştirilebilir</span>
-          </label>
-          <div class="flex items-center gap-2 col-span-2 md:col-span-1 justify-end">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 mt-4 items-center">
+          <button type="button" id="refundableToggle" class="custom-check-wrap flex items-center gap-2 w-fit select-none rounded-lg px-1 py-1" role="checkbox" aria-checked="{{ 'true' if form.refundable_only else 'false' }}">
+            <input type="hidden" name="refundable_only" id="refundableInput" value="{{ 'true' if form.refundable_only else '' }}" />
+            <span class="custom-check rounded-md inline-flex items-center justify-center text-xs">✓</span>
+            <span class="text-sm text-slate-600 font-semibold" data-i18n="refundableOnly">Only refundable</span>
+          </button>
+          <div class="flex items-center gap-2 justify-end">
             {% if results %}
               <a href="/" class="px-3.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-xs font-bold text-slate-600 transition flex items-center justify-center gap-1" title="Aramayı Sıfırla">✕ Sıfırla</a>
             {% endif %}
-            <button class="btn-primary text-white font-bold px-5 py-2.5 rounded-xl inline-flex items-center justify-center gap-2 flex-1"><svg class="ic"><use href="#i-search"/></svg> <span data-i18n="searchBtn">Uçuş ara</span></button>
           </div>
         </div>
       </form>
@@ -1139,8 +1437,9 @@
         loginTitle:'Giriş Yap', loginEmail:'E-POSTA VEYA MILES&SMILES NO', loginPass:'ŞFRE', loginBtn:'Giriş Yap', loginRemember:'Beni hatırla', loginForgot:'Şifremi unuttum', loginNoAccount:'Üye değil misiniz?', loginGoJoin:'Üye olun',
         heroTitleCase:'Nereye uçuyoruz?', heroSubCase:'Havacılık Gelir Yönetimi Vaka Çalışması · Yılmaz Ailesi senaryosu · 2 MCP kaynağı',
         tabSearch:'Uçuş ara', tabCheckin:'Check-in', tabManage:'Rezervasyonunu yönet', tabStatus:'Uçuş durumu',
-        lblFrom:'NEREDEN', lblTo:'NEREYE', lblDate:'GİDİŞ', lblReturnDate:'DÖNÜŞ', lblTrip:'SEYAHAT TİPİ', lblAdult:'YETİŞKİN', lblChild:'ÇOCUK', lblInfant:'BEBEK',
-        optOW:'Tek yön', optRT:'Gidiş-dönüş', changeableOnly:'Sadece değiştirilebilir', searchBtn:'Uçuş ara',
+        lblFrom:'NEREDEN', lblTo:'NEREYE', lblDate:'GİDİŞ', lblReturnDate:'DÖNÜŞ', lblTrip:'SEYAHAT TİPİ', lblAdult:'YETİŞKİN', lblChild:'ÇOCUK', lblInfant:'BEBEK', lblPassengers:'YOLCULAR',
+        optOW:'Tek yön', optRT:'Gidiş-dönüş', changeableOnly:'Sadece değiştirilebilir', refundableOnly:'Only refundable', searchBtn:'Uçuş ara',
+        paxSingular:'Yolcu', paxPlural:'Yolcu',
         feat1t:'Dinamik fiyatlandırma', feat1d:'Kalkışa 2 gün kala ×1.45, 7 gün kala ×1.25 çarpan. Erken alan kazanır.',
         feat2t:'Gidiş-dönüş avantajı', feat2d:"Round-trip bilet, tek yönün %88'i. İki ayrı bilet neredeyse hiç mantıklı değil.",
         feat3t:'AI Seyahat Danışmanı', feat3d:'Seyahat ihtiyacınızı anlatın, size en uygun seçenekleri sunalım.',
@@ -1222,8 +1521,9 @@
         loginTitle:'Log in', loginEmail:'EMAIL OR MILES&SMILES NO', loginPass:'PASSWORD', loginBtn:'Log in', loginRemember:'Remember me', loginForgot:'Forgot password', loginNoAccount:'Not a member?', loginGoJoin:'Join now',
         heroTitleCase:'Where are we flying?', heroSubCase:'Airline Revenue Management Case Study · Yılmaz Family scenario · 2 MCP sources',
         tabSearch:'Search flights', tabCheckin:'Check-in', tabManage:'Manage booking', tabStatus:'Flight status',
-        lblFrom:'FROM', lblTo:'TO', lblDate:'DEPARTURE', lblReturnDate:'RETURN', lblTrip:'TRIP TYPE', lblAdult:'ADULT', lblChild:'CHILD', lblInfant:'INFANT',
-        optOW:'One way', optRT:'Round trip', changeableOnly:'Changeable only', searchBtn:'Search',
+        lblFrom:'FROM', lblTo:'TO', lblDate:'DEPARTURE', lblReturnDate:'RETURN', lblTrip:'TRIP TYPE', lblAdult:'ADULT', lblChild:'CHILD', lblInfant:'INFANT', lblPassengers:'PASSENGERS',
+        optOW:'One way', optRT:'Round trip', changeableOnly:'Changeable only', refundableOnly:'Only refundable', searchBtn:'Search',
+        paxSingular:'Passenger', paxPlural:'Passengers',
         feat1t:'Dynamic pricing', feat1d:'×1.45 within 2 days of departure, ×1.25 within 7. Book early, pay less.',
         feat2t:'Round-trip advantage', feat2d:'A round-trip fare is 88% of one-way. Two separate one-ways rarely make sense.',
         featBundleT:'AI-Powered Bundling', featBundleD:'Describe your travel needs in plain English, and AI will build personalized bundles (Economy, Recommended, Comfort).',
@@ -1307,6 +1607,9 @@
       if (typeof loadStats === 'function') loadStats();
       if (typeof loadCaseSolution === 'function') loadCaseSolution();
       if (typeof paintStt === 'function') paintStt();
+      if (window.formPickersReady && typeof updateDatePreview === 'function') updateDatePreview();
+      if (window.formPickersReady && typeof renderCalendar === 'function') renderCalendar();
+      if (window.formPickersReady && typeof updatePax === 'function') updatePax();
     }
     document.getElementById('langTr').onclick = () => { lang='tr'; localStorage.setItem('ui-lang','tr'); applyLang(); };
     document.getElementById('langEn').onclick = () => { lang='en'; localStorage.setItem('ui-lang','en'); applyLang(); };
@@ -1924,6 +2227,18 @@
     // ===== Airport Autocomplete Dropdown & Quick Search Handler =====
     const ALL_AIRPORTS = {{ airports | tojson }};
 
+    function openPopup(panel, trigger) {
+      if (!panel) return;
+      panel.classList.add('is-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closePopup(panel, trigger) {
+      if (!panel) return;
+      panel.classList.remove('is-open');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+
     function setupAutocomplete(inputId, hiddenId, dropdownId) {
       const input = document.getElementById(inputId);
       const hidden = document.getElementById(hiddenId);
@@ -1940,7 +2255,7 @@
       // Keyboard navigation: Up/Down to move, Enter to pick, Escape to close
       input.addEventListener('keydown', (e) => {
         const items = [...dropdown.querySelectorAll('[data-ac-item]')];
-        if (!items.length || dropdown.classList.contains('hidden')) {
+        if (!items.length || !dropdown.classList.contains('is-open')) {
           if (e.key === 'ArrowDown') renderDropdown(input.value, dropdown, input, hidden);
           return;
         }
@@ -1958,14 +2273,14 @@
         } else if (e.key === 'Enter') {
           if (idx >= 0) { e.preventDefault(); items[idx].click(); }
         } else if (e.key === 'Escape') {
-          dropdown.classList.add('hidden');
+          closePopup(dropdown);
           input.blur();
         }
       });
 
       document.addEventListener('click', (e) => {
         if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-          dropdown.classList.add('hidden');
+          closePopup(dropdown);
         }
       });
     }
@@ -1978,26 +2293,26 @@
 
       if (filtered.length === 0) {
         dropdown.innerHTML = `<div class="p-3 text-xs text-slate-400 text-center font-medium">Havalimanı bulunamadı</div>`;
-        dropdown.classList.remove('hidden');
+        openPopup(dropdown);
         return;
       }
 
-      dropdown.innerHTML = filtered.map(a => `
-        <div data-ac-item data-active="0" onclick="selectAirport('${a.code}', '${a.name.replace(/'/g, "\\'")}', '${input.id}', '${hidden.id}', '${dropdown.id}')" class="px-3.5 py-2.5 hover:bg-rose-50/50 cursor-pointer flex items-center justify-between transition group">
-          <div class="flex items-center gap-2.5">
-            <span class="px-2 py-0.5 bg-slate-100 group-hover:bg-rose-100 group-hover:text-rose-700 rounded text-xs font-bold text-slate-700 tracking-wider transition-colors">${a.code}</span>
-            <span class="text-xs font-semibold text-slate-800 group-hover:text-rose-900 transition-colors">${a.name}</span>
+      dropdown.innerHTML = `<div class="airport-list">${filtered.map(a => `
+        <div data-ac-item data-active="0" onclick="selectAirport('${a.code}', '${a.name.replace(/'/g, "\\'")}', '${input.id}', '${hidden.id}', '${dropdown.id}')" class="airport-row px-3.5 py-2.5 cursor-pointer flex items-center justify-between transition group">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="px-2 py-0.5 bg-slate-100 rounded text-xs font-bold text-slate-700 transition-colors">${a.code}</span>
+            <span class="text-xs font-semibold text-slate-800 truncate">${a.name}</span>
           </div>
-          <span class="text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">Seç ➔</span>
+          <span class="text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-4">Seç ➔</span>
         </div>
-      `).join('');
-      dropdown.classList.remove('hidden');
+      `).join('')}</div>`;
+      openPopup(dropdown);
     }
 
     function selectAirport(code, name, inputId, hiddenId, dropdownId) {
       document.getElementById(inputId).value = `${code} — ${name}`;
       document.getElementById(hiddenId).value = code;
-      document.getElementById(dropdownId).classList.add('hidden');
+      closePopup(document.getElementById(dropdownId));
     }
 
     function swapAirports() {
@@ -2028,51 +2343,233 @@
         document.getElementById('destInput').value = `${foundD.code} — ${foundD.name}`;
         document.getElementById('destValue').value = dest;
       }
-      if (dateStr) {
-        const dateEl = document.querySelector('input[name="date"]');
-        if (dateEl) dateEl.value = dateStr;
-      }
+      if (dateStr) setSelectedDate('depart', parseIsoDate(dateStr));
       const form = document.querySelector('form[action="/search"]');
       if (form) form.submit();
     }
 
-    function toggleReturnDate() {
-      const tripTypeSelect = document.getElementById('tripTypeSelect');
-      const returnBox = document.getElementById('returnDateBox');
-      const departDateInput = document.getElementById('departDate');
-      const returnDateInput = document.getElementById('returnDate');
+    const MONTHS = {
+      tr: ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'],
+      en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    };
+    const WEEKDAYS = {
+      tr: ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'],
+      en: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    };
+    let calendarCursor = new Date();
+    let pickingReturn = false;
+    let calendarHoverDate = null;
 
-      if (!tripTypeSelect || !returnBox || !returnDateInput) return;
-
-      if (tripTypeSelect.value === 'round_trip') {
-        returnBox.classList.remove('opacity-40', 'pointer-events-none');
-        returnBox.classList.add('opacity-100');
-        returnDateInput.disabled = false;
-        returnDateInput.classList.remove('bg-slate-100', 'cursor-not-allowed');
-        returnDateInput.classList.add('bg-white', 'cursor-pointer');
-
-        if (!returnDateInput.value && departDateInput && departDateInput.value) {
-          const d = new Date(departDateInput.value);
-          d.setDate(d.getDate() + 7);
-          returnDateInput.value = d.toISOString().slice(0, 10);
-        }
-      } else {
-        returnBox.classList.remove('opacity-100');
-        returnBox.classList.add('opacity-40', 'pointer-events-none');
-        returnDateInput.disabled = true;
-        returnDateInput.classList.remove('bg-white', 'cursor-pointer');
-        returnDateInput.classList.add('bg-slate-100', 'cursor-not-allowed');
-      }
+    function parseIsoDate(value) {
+      if (!value) return null;
+      const [y, m, d] = value.split('-').map(Number);
+      if (!y || !m || !d) return null;
+      return new Date(y, m - 1, d);
     }
-
-    document.getElementById('tripTypeSelect')?.addEventListener('change', toggleReturnDate);
-    document.getElementById('departDate')?.addEventListener('change', () => {
-      const tripTypeSelect = document.getElementById('tripTypeSelect');
-      if (tripTypeSelect && tripTypeSelect.value === 'round_trip') {
-        toggleReturnDate();
+    function isoDate(date) {
+      if (!date) return '';
+      return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+    }
+    function sameDay(a, b) {
+      return !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    }
+    function compareDay(a, b) {
+      return new Date(a.getFullYear(), a.getMonth(), a.getDate()) - new Date(b.getFullYear(), b.getMonth(), b.getDate());
+    }
+    function betweenDays(date, a, b) {
+      if (!date || !a || !b) return false;
+      const start = compareDay(a, b) <= 0 ? a : b;
+      const end = start === a ? b : a;
+      return compareDay(date, start) >= 0 && compareDay(date, end) <= 0;
+    }
+    function addDays(date, days) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+    function setSelectedDate(kind, date) {
+      const target = document.getElementById(kind === 'return' ? 'returnDate' : 'departDate');
+      if (target) target.value = isoDate(date);
+      updateDatePreview();
+      renderCalendar();
+    }
+    function updateDatePreview() {
+      const depart = parseIsoDate(document.getElementById('departDate')?.value);
+      const ret = parseIsoDate(document.getElementById('returnDate')?.value);
+      const setPreview = (prefix, date) => {
+        document.getElementById(`${prefix}DayPreview`).textContent = date ? String(date.getDate()).padStart(2, '0') : '';
+        document.getElementById(`${prefix}MonthPreview`).textContent = date ? MONTHS[lang][date.getMonth()] : '';
+      };
+      setPreview('depart', depart);
+      setPreview('return', ret);
+      const isRoundTrip = document.getElementById('tripTypeInput')?.value === 'round_trip';
+      document.getElementById('datePickerButton')?.classList.toggle('is-one-way', !isRoundTrip);
+      document.getElementById('returnPreviewSegment')?.classList.toggle('opacity-40', !isRoundTrip);
+      document.getElementById('datePickerHint').textContent = isRoundTrip
+        ? (pickingReturn ? (lang === 'en' ? 'Choose return date' : 'Dönüş tarihini seçin') : (lang === 'en' ? 'Choose departure date' : 'Gidiş tarihini seçin'))
+        : (lang === 'en' ? 'Choose departure date' : 'Gidiş tarihini seçin');
+    }
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      const title = document.getElementById('calendarTitle');
+      if (!grid || !title) return;
+      const year = calendarCursor.getFullYear();
+      const month = calendarCursor.getMonth();
+      title.textContent = `${MONTHS[lang][month]} ${year}`;
+      const first = new Date(year, month, 1);
+      const startOffset = (first.getDay() + 6) % 7;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const depart = parseIsoDate(document.getElementById('departDate')?.value);
+      const ret = parseIsoDate(document.getElementById('returnDate')?.value);
+      const isRoundTrip = document.getElementById('tripTypeInput')?.value === 'round_trip';
+      const previewEnd = isRoundTrip && pickingReturn && calendarHoverDate ? calendarHoverDate : ret;
+      let html = WEEKDAYS[lang].map(d => `<div class="text-[11px] text-slate-400 font-bold py-1">${d}</div>`).join('');
+      for (let i = 0; i < startOffset; i++) html += '<div></div>';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day);
+        const selected = sameDay(date, depart) || sameDay(date, ret);
+        const inRange = isRoundTrip && depart && previewEnd && betweenDays(date, depart, previewEnd);
+        const preview = isRoundTrip && pickingReturn && calendarHoverDate && sameDay(date, calendarHoverDate);
+        const classes = [
+          'calendar-day rounded-lg text-sm font-bold',
+          selected ? 'is-selected' : 'text-slate-700',
+          inRange && !selected ? 'is-in-range' : '',
+          preview && !selected ? 'is-preview' : '',
+        ].join(' ');
+        html += `<button type="button" class="${classes}" data-cal-day="${isoDate(date)}">${day}</button>`;
       }
+      grid.innerHTML = html;
+      grid.onmouseover = (e) => {
+        const btn = e.target.closest?.('[data-cal-day]');
+        if (!btn) return;
+        if (document.getElementById('tripTypeInput')?.value === 'round_trip' && parseIsoDate(document.getElementById('departDate')?.value)) {
+          const nextHover = parseIsoDate(btn.dataset.calDay);
+          if (!sameDay(calendarHoverDate, nextHover)) {
+            calendarHoverDate = nextHover;
+            renderCalendar();
+          }
+        }
+      };
+      grid.onmouseleave = () => {
+        if (calendarHoverDate) {
+          calendarHoverDate = null;
+          renderCalendar();
+        }
+      };
+      grid.querySelectorAll('[data-cal-day]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const picked = parseIsoDate(btn.dataset.calDay);
+          const tripType = document.getElementById('tripTypeInput')?.value || 'one_way';
+          if (tripType === 'round_trip' && pickingReturn) {
+            setSelectedDate('return', picked);
+            pickingReturn = false;
+            calendarHoverDate = null;
+            closePopup(document.getElementById('datePickerPopup'), document.getElementById('datePickerButton'));
+          } else {
+            setSelectedDate('depart', picked);
+            if (tripType === 'round_trip') {
+              pickingReturn = true;
+              document.getElementById('returnDate').value = '';
+              calendarHoverDate = null;
+              updateDatePreview();
+              renderCalendar();
+            } else {
+              closePopup(document.getElementById('datePickerPopup'), document.getElementById('datePickerButton'));
+            }
+          }
+          updateDatePreview();
+        });
+      });
+      updateDatePreview();
+    }
+    function setTripType(value) {
+      const input = document.getElementById('tripTypeInput');
+      if (input) input.value = value;
+      document.querySelectorAll('[data-trip-option]').forEach(btn => {
+        btn.setAttribute('aria-checked', btn.dataset.tripOption === value ? 'true' : 'false');
+      });
+      if (value === 'round_trip') {
+        pickingReturn = !!parseIsoDate(document.getElementById('departDate')?.value) && !parseIsoDate(document.getElementById('returnDate')?.value);
+      } else {
+        document.getElementById('returnDate').value = '';
+        pickingReturn = false;
+        calendarHoverDate = null;
+      }
+      updateDatePreview();
+      renderCalendar();
+    }
+    document.querySelectorAll('[data-trip-option]').forEach(btn => {
+      btn.addEventListener('click', () => setTripType(btn.dataset.tripOption));
     });
-    toggleReturnDate();
+    document.getElementById('datePickerButton')?.addEventListener('click', () => {
+      const popup = document.getElementById('datePickerPopup');
+      const trigger = document.getElementById('datePickerButton');
+      popup.classList.contains('is-open') ? closePopup(popup, trigger) : openPopup(popup, trigger);
+      renderCalendar();
+    });
+    document.getElementById('calPrev')?.addEventListener('click', () => {
+      calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() - 1, 1);
+      renderCalendar();
+    });
+    document.getElementById('calNext')?.addEventListener('click', () => {
+      calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 1);
+      renderCalendar();
+    });
+    document.addEventListener('click', (e) => {
+      const popup = document.getElementById('datePickerPopup');
+      const trigger = document.getElementById('datePickerButton');
+      const path = e.composedPath ? e.composedPath() : [];
+      if (popup && trigger && !path.includes(popup) && !path.includes(trigger)) closePopup(popup, trigger);
+    });
+
+    function updatePax() {
+      const vals = {
+        adults: Math.max(1, Number(document.getElementById('adultsInput')?.value || 1)),
+        children: Math.max(0, Number(document.getElementById('childrenInput')?.value || 0)),
+        babies: Math.max(0, Number(document.getElementById('babiesInput')?.value || 0)),
+      };
+      Object.entries(vals).forEach(([key, value]) => {
+        document.getElementById(`${key}Input`).value = value;
+        document.getElementById(`${key}Count`).textContent = value;
+      });
+      const total = vals.adults + vals.children + vals.babies;
+      document.getElementById('paxButtonText').textContent = `${total} ${total === 1 ? t('paxSingular') : t('paxPlural')}`;
+    }
+    document.getElementById('paxButton')?.addEventListener('click', () => {
+      const popup = document.getElementById('paxPopup');
+      const trigger = document.getElementById('paxButton');
+      popup.classList.contains('is-open') ? closePopup(popup, trigger) : openPopup(popup, trigger);
+    });
+    document.querySelectorAll('[data-pax-row]').forEach(row => {
+      row.querySelector('.pax-minus')?.addEventListener('click', () => {
+        const key = row.dataset.paxRow;
+        const input = document.getElementById(`${key}Input`);
+        const min = key === 'adults' ? 1 : 0;
+        input.value = Math.max(min, Number(input.value || min) - 1);
+        updatePax();
+      });
+      row.querySelector('.pax-plus')?.addEventListener('click', () => {
+        const key = row.dataset.paxRow;
+        const input = document.getElementById(`${key}Input`);
+        input.value = Number(input.value || 0) + 1;
+        updatePax();
+      });
+    });
+    document.addEventListener('click', (e) => {
+      const popup = document.getElementById('paxPopup');
+      const trigger = document.getElementById('paxButton');
+      if (popup && trigger && !popup.contains(e.target) && !trigger.contains(e.target)) closePopup(popup, trigger);
+    });
+    document.getElementById('refundableToggle')?.addEventListener('click', () => {
+      const btn = document.getElementById('refundableToggle');
+      const input = document.getElementById('refundableInput');
+      const next = btn.getAttribute('aria-checked') !== 'true';
+      btn.setAttribute('aria-checked', next ? 'true' : 'false');
+      input.value = next ? 'true' : '';
+    });
+    setTripType(document.getElementById('tripTypeInput')?.value || 'one_way');
+    updatePax();
+    window.formPickersReady = true;
 
     // Search form: show a loading state so the click clearly registers
     (function initSearchLoading(){

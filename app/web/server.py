@@ -117,6 +117,7 @@ def search(
     children: Optional[str] = Form(None),
     babies: Optional[str] = Form(None),
     changeable_only: Optional[str] = Form(None),
+    refundable_only: Optional[str] = Form(None),
 ):
     origin_str = (origin or "IST").strip()
     dest_str = (destination or "LHR").strip()
@@ -127,6 +128,7 @@ def search(
     children_cnt = _safe_int(children, 0)
     babies_cnt = _safe_int(babies, 0)
     is_changeable = str(changeable_only).lower() in ("true", "1", "on", "yes")
+    is_refundable = str(refundable_only).lower() in ("true", "1", "on", "yes")
 
     if not date_str:
         results = {
@@ -143,7 +145,7 @@ def search(
         }
     else:
         results = service.search_flights(
-            origin_str, dest_str, date_str, adults_cnt, children_cnt, babies_cnt, trip_str, is_changeable
+            origin_str, dest_str, date_str, adults_cnt, children_cnt, babies_cnt, trip_str, is_changeable, is_refundable
         )
 
     return templates.TemplateResponse(
@@ -156,7 +158,7 @@ def search(
                 "origin": origin_str, "destination": dest_str, "date": date_str,
                 "return_date": return_date, "trip_type": trip_str,
                 "adults": adults_cnt, "children": children_cnt,
-                "babies": babies_cnt, "changeable_only": is_changeable,
+                "babies": babies_cnt, "changeable_only": is_changeable, "refundable_only": is_refundable,
             },
         },
     )
