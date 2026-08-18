@@ -90,7 +90,7 @@ Pricing_chatbot/
 │   ├── chroma/                # Persistent ChromaDB vector index
 │   ├── pricer.sqlite3         # Flight inventory & booking SQLite database
 │   └── SOURCES.md             # RAG provenance & citation reference
-├── pyproject.toml / uv.lock   # Project dependencies & package lockfiles
+├── pyproject.toml             # Project dependency configuration
 ├── requirements.txt           # Standard Python requirements
 └── .env.example               # Environment variables template
 ```
