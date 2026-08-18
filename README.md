@@ -6,9 +6,14 @@ A dynamic airline revenue management and AI-powered flight booking assistant (**
 
 ## 📸 Application Showcase
 
+### 🌐 Flight Search & Booking Portal
 <p align="center">
-  <img src="assets/flight_search_ui.png" alt="Turkish Airlines Flight Search Interface" width="58%" />
-  <img src="assets/wingo_chat_ui.png" alt="Wingo AI Assistant Panel" width="38%" />
+  <img src="assets/flight_search_ui.png" alt="Turkish Airlines Flight Search Interface" width="100%" />
+</p>
+
+### 🤖 Wingo AI Travel Assistant Modal
+<p align="center">
+  <img src="assets/wingo_chat_ui.png" alt="Wingo AI Assistant Panel" width="65%" />
 </p>
 
 ---
